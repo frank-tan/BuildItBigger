@@ -1,13 +1,36 @@
 package com.udacity.gradle.builditbigger;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.LargeTest;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+
+@RunWith(AndroidJUnit4.class)
+@LargeTest
+public class ApplicationTest  {
+
+    private static String DUMMY_JOKE = "This is a dummy joke";
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+            MainActivity.class);
+
+    @Test
+    public void clickButton_showJoke() {
+        // Type text and then press the button.
+        onView(withId(R.id.btnTellJoke))
+                .perform(click());
+
+        // Check that the text was changed.
+        onView(withId(R.id.jokeText)).check(matches(withText(DUMMY_JOKE)));
     }
 }
