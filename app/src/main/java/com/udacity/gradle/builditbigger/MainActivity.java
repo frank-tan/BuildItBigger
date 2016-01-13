@@ -5,18 +5,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 public class MainActivity extends AppCompatActivity implements ShowJoke {
 
     static public String JOKE = "JOKE";
+    ProgressBar mSpinner;
+    Button mButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mButton = (Button) findViewById(R.id.btnTellJoke);
+        mSpinner = (ProgressBar) findViewById(R.id.progressBar);
+        mSpinner.setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSpinner.setVisibility(View.GONE);
+        mButton.setClickable(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements ShowJoke {
     }
 
     public void openJokeActivity(View view) {
+        mButton.setClickable(false);
+        mSpinner.setVisibility(View.VISIBLE);
         new EndpointsAsyncTask().execute(this);
     }
 }
