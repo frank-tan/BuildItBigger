@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ShowJoke {
 
     static public String JOKE = "JOKE";
 
@@ -40,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
-        //Toast.makeText(this, JokeTeller.tellJoke(), Toast.LENGTH_SHORT).show();
-        new EndpointsAsyncTask().execute(this);
+    @Override
+    public void openJokeActivity() {
+        openJokeActivity(null);
     }
 
-
+    public void openJokeActivity(View view) {
+        new EndpointsAsyncTask().execute(this);
+    }
 }
