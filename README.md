@@ -6,6 +6,8 @@ As Android projects grow in complexity, it becomes necessary to customize the be
 
 In this project, I created an app with multiple flavors that uses multiple libraries and Google Cloud Endpoints. The app consists of four modules:
 
+![Architecture Drawing](web/architecture.png)
+
 1. A Java library that provides jokes
 2. A Google Cloud Endpoints (GCE) project that serves those jokes
 3. An Android Library containing an activity for displaying jokes
